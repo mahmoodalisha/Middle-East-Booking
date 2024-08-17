@@ -33,5 +33,5 @@ module.exports = router;
 
 
 //Token Generation: server generates token after successful authentication of the user and authentication is only done after login.
-//Cookie Generation: The server sends the JWT back to the client as an HTTP-only cookie in the response. 
-//Subsequent Requests: The cookie is included in subsequent requests and the server verifies the token in the cookie to authenticate the user.
+//this token or id is stored in client's browser history called session storage, it is also stored in database
+//client having the token, should be secured, so we encrypt them and provide a secret key to the server to prevent hacking

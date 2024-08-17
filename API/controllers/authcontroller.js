@@ -22,7 +22,7 @@ const register = async (req, res, next) => {
 
 const login = async (req, res, next) => {
   try {
-    const user = await User.findOne({ username: req.body.username });
+    const user = await User.findOne({ username: req.body.username }); //req.body contains the data sent in the body of an HTTP request. This is commonly used in POST requests where the client (such as a web browser or API client) sends data to the server.
     if (!user) return next(createError(404, "User not found!"));
 
     const isPasswordCorrect = await bcrypt.compare(
@@ -32,14 +32,16 @@ const login = async (req, res, next) => {
     if (!isPasswordCorrect)
       return next(createError(400, "Wrong password or username!"));
 
-    const token = jwt.sign(
+
+    //payload
+    const token = jwt.sign(   //jwt.sign() is used to generate a JWT. The JWT includes a payload (like user ID and roles) that is signed using a secret key.
       { id: user._id, isAdmin: user.isAdmin },
       process.env.JWT
     );
 
     const { password, isAdmin, ...otherDetails } = user._doc;
     res
-      .cookie("access_token", token, {
+      .cookie("access_token", token, {  //The JWT is stored in an HTTP-only cookie on the client-side, no local or session storage is used
         httpOnly: true,
       })
       .status(200)
