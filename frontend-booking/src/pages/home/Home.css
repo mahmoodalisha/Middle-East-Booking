@@ -1,0 +1,30 @@
+.homeContainer{
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+}
+.homeTitle h1{
+    margin-left: 500px;
+    margin-right: auto;
+}
+.headerBox {
+    background-color: #1690e7;
+    padding: 8px 12px; /* Reduced padding */
+    border-radius: 8px;
+    display: inline-block;
+    margin: 5px auto; /* Center horizontally with margin: 0 auto */
+    box-shadow: 20px 20px 30px rgba(0, 0, 0, 0.5);
+    color: white;
+    width: fit-content; /* Adjust width as needed or specify a fixed width */
+}
+
+.headerTitle {
+    margin: 0;
+    font-size: 1.5em; /* Reduced font size */
+    text-align: center;
+    color: white;
+}
+
+ 
