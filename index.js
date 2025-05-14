@@ -1,12 +1,13 @@
 require("dotenv").config()
 const express = require("express");
+const cors = require('cors');
 const dotenv = require("dotenv");
 const cookieParser = require('cookie-parser');
 const { verifyToken, verifyUser, verifyAdmin } = require('./utils/verifyToken');
 const db = process.env.MONGO;
 const path = require("path")
 
-// Import routes
+
 const authRoute = require('./routes/auth');
 const usersRoute = require('./routes/users');
 const hotelsRoute = require('./routes/hotels');
@@ -15,9 +16,8 @@ const roomsRoute = require('./routes/rooms');
 
 
 const app = express();
+app.use(cors());
 
-// Database connection with mongodb
-//connecting mongodb with express server
 const mongoose = require("mongoose");
 
 mongoose.connect(db)
@@ -35,12 +35,12 @@ app.get("/test",(req,res)=>{
     res.send("Express app is running")
 })
 
-// Middleware
+
 app.use(cookieParser());
 app.use(express.json());
 
 
-// Route Middleware
+
 app.use("/api/auth", authRoute);
 app.use("/api/users", usersRoute);
 app.use("/api/hotels", hotelsRoute);
@@ -71,7 +71,7 @@ app.get('*', (req, res) => {
 });
 
 
-// Start the server
+
 app.listen(8000, () => {
     //connect();
     console.log('Server is running on port 8000');

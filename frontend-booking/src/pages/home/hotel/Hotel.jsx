@@ -14,7 +14,7 @@ import { useContext, useState } from "react";
 import useFetch from "../../../hooks/useFetch";
 import { useLocation, useNavigate } from "react-router-dom";
 import { SearchContext } from "../../../context/SearchContext";
-import { AuthContext } from "../../../context/AuthContext";
+import { useSelector } from "react-redux";
 import Reserve from "../../../components/reserve/Reserve";
 
 
@@ -26,7 +26,7 @@ const Hotel = () => {
   const [openModal, setOpenModal] = useState(false); //openModal for rooms to reserve in hotel
 
   const { data, loading, error } = useFetch(`/api/hotels/find/${id}`);  //keep in mind this url
-  const { user } = useContext(AuthContext); //importing this so that if the user is not logged in and wants to reserve hotel, he will be redirected to login
+  const { user } = useSelector((state) => state.auth); //get the user from redux store
   const navigate = useNavigate();
 
   const { dates, options } = useContext(SearchContext);

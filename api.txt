@@ -1,0 +1,29 @@
+POST http://localhost:8000/api/auth/login
+{
+  "username": "mahmood123",
+  "email": "mahmood@example.com",
+  "password": "securePassword"
+}
+
+{
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MjM1ZDA1NzUwMjQ3NjUyNzIxYTc2NCIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE3NDcxNDk5NDZ9.jmPB36cUGpqKNndk7_j2ULm-R3nBoTLXFm8Pk5RrVmc",
+  "details": {
+    "_id": "68235d05750247652721a764",
+    "username": "mahmood123",
+    "email": "mahmood@example.com",
+    "createdAt": "2025-05-13T14:53:57.737Z",
+    "updatedAt": "2025-05-13T14:53:57.737Z",
+    "__v": 0
+  },
+  "isAdmin": false
+} 
+
+GET http://localhost:8000/api/users/checkauthentication
+Authorization Bearer 
+hey there, you are successfully logged in
+
+GET http://localhost:8000/api/users/checkuser/68235d05750247652721a764
+hey there, you are verified and now can dlt your acc
+
+DELETE http://localhost:8000/api/users/668079c3dbeae54a35a8b051
+"User has been deleted."

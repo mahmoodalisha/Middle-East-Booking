@@ -1,26 +1,67 @@
-import { useContext } from "react";
-import "./Navbar.css"
-import { Link } from "react-router-dom";
-import { AuthContext } from "../../context/AuthContext";
-const Navbar = () => {
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { logout } from "../../redux/slices/authSlice";
+import "./Navbar.css";
 
-  const {user} = useContext(AuthContext);
+const Navbar = () => {
+  const { user } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate("/login");
+  };
+
   return (
     <div className="navbar">
-        <div className="navContainer">
+      <div className="navContainer">
         <Link to="/" style={{ color: "inherit", textDecoration: "none" }}>
-          <span className="logo">Urban  Lodgings </span> </Link>
+          <span className="logo">Urban Lodgings</span>
+        </Link>
 
-          
-        {user ? user.username : (<div className="navItems">
-            <button className="navButton">Register</button>
-            <button className="navButton">Login</button></div>)}
-
-        
-        </div>
+        {user ? (
+          <div className="navItems">
+            <span
+      className="welcomeMessage"
+      style={{
+        fontWeight: "bold",
+        color: "#fff",
+        marginLeft: "30px",
+        fontSize: "19px",
+      }}
+    >
+      Welcome!{" "}
+    </span>
+    <span
+      className="username"
+      style={{
+        fontWeight: "bold",
+        color: "#fff",
+        marginLeft: "3px",
+        fontSize: "19px"
+      }}
+    >
+      {user.username}
+    </span>
+            <button className="navButton" onClick={handleLogout}>
+              Logout
+            </button>
+          </div>
+        ) : (
+          <div className="navItems">
+            <Link to="/register">
+              <button className="navButton">Register</button>
+            </Link>
+            <Link to="/login">
+              <button className="navButton">Login</button>
+            </Link>
+          </div>
+        )}
       </div>
-  )
-}
+    </div>
+  );
+};
 
-export default Navbar
-//writing the condition to display the username after login and if no user is logged in then buttons of login, register will be displayed
+export default Navbar;
