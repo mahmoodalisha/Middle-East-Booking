@@ -17,7 +17,11 @@ const roomsRoute = require('./routes/rooms');
 
 const app = express();
 app.use(cors());
-
+// Add Cache-Control middleware
+app.use((req, res, next) => {
+    res.set('Cache-Control', 'no-store');
+    next();
+});
 const mongoose = require("mongoose");
 
 mongoose.connect(db)
