@@ -1,5 +1,3 @@
-//common js 
-//this isn't module js
 const User = require('../models/User');
 
 const updateUser = async (req, res, next) => {

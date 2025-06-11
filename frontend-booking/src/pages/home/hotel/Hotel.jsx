@@ -25,7 +25,7 @@ const Hotel = () => {
   const [open, setOpen] = useState(false);
   const [openModal, setOpenModal] = useState(false); //openModal for rooms to reserve in hotel
 
-  const { data, loading, error } = useFetch(`/api/hotels/find/${id}`);  //keep in mind this url
+  const { data, loading, error } = useFetch(`http://localhost:8000/api/hotels/find/${id}`);  //keep in mind this url
   const { user } = useSelector((state) => state.auth); //get the user from redux store
   const navigate = useNavigate();
 
@@ -38,7 +38,10 @@ const Hotel = () => {
     return diffDays;
   }
 
-  const days = dayDifference(dates[0].endDate, dates[0].startDate);
+  const days = dates && dates[0]
+  ? dayDifference(new Date(dates[0].endDate), new Date(dates[0].startDate))
+  : 0;
+
 
   const handleOpen = (i) => {
     setSlideNumber(i);

@@ -12,7 +12,8 @@ import { useNavigate } from "react-router-dom";
 //fetch rooms of hotelId in here
 const Reserve = ({ setOpen, hotelId }) => {
   const [selectedRooms, setSelectedRooms] = useState([]);
-  const { data, loading, error } = useFetch(`/api/hotels/room/${hotelId}`);
+  const [successMsg, setSuccessMsg] = useState("");
+  const { data, loading, error } = useFetch(`http://localhost:8000/api/hotels/room/${hotelId}`);
   const { dates } = useContext(SearchContext);
 
   const getDatesInRange = (startDate, endDate) => {
@@ -54,19 +55,50 @@ const Reserve = ({ setOpen, hotelId }) => {
   const navigate = useNavigate();  //navigate back to homepage
 
   const handleClick = async () => {
-    try {
-      await Promise.all(
-        selectedRooms.map((roomId) => {
-          const res = axios.put(`/rooms/availability/${roomId}`, {
-            dates: alldates, //keep in mind this url
-          });
-          return res.data;
-        })
-      );
+  try {
+    // Step 1: Update room availability
+    await Promise.all(
+      selectedRooms.map((roomId) => {
+        return axios.put(`http://localhost:8000/api/rooms/availability/${roomId}`, {
+        dates: alldates,
+      }, {
+        withCredentials: true 
+      });
+
+      })
+    );
+
+    // Step 2: Create booking entries
+    await Promise.all(
+      selectedRooms.map((roomId) =>
+        axios.post("http://localhost:8000/api/bookings", {
+        hotelId,
+        roomId,
+        roomNumber: "",
+        startDate: dates[0].startDate,
+        endDate: dates[0].endDate,
+        totalAmount: 1000,
+      }, {
+        withCredentials: true 
+    })
+
+      )
+    );
+
+    // Step 3: Show success message
+    setSuccessMsg("Your booking is successful!");
+
+    // Step 4: Optionally auto-close modal after delay
+    setTimeout(() => {
       setOpen(false);
       navigate("/");
-    } catch (err) {}
-  };
+    }, 2000);
+  } catch (err) {
+    console.error(err);
+    setSuccessMsg("Booking failed. Please try again.");
+  }
+};
+
   return (
     <div className="reserve">
       <div className="rContainer">
@@ -101,6 +133,7 @@ const Reserve = ({ setOpen, hotelId }) => {
             </div>
           </div>
         ))}
+        {successMsg && <div className="successMsg">{successMsg}</div>}
         <button onClick={handleClick} className="rButton">
           Reserve Now!
         </button>
@@ -111,3 +144,4 @@ const Reserve = ({ setOpen, hotelId }) => {
 
 export default Reserve;
 //localhost:8000/api/hotels/room/66548bd74993e1d528fb252a  to reserve the rooms of a hotel
+

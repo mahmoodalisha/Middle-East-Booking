@@ -20,3 +20,4 @@ router.get("/:id", getRoom);
 router.get("/", getRooms);
 
 module.exports = router;
+

@@ -2,7 +2,7 @@ import './resort.css'
 import useFetch from '../../hooks/useFetch';
 const FeaturedProperties = () => {
 
-  const {data, loading, error} = useFetch("/api/hotels?featured=true&limit=3")
+  const {data, loading, error} = useFetch("http://localhost:8000/api/hotels?featured=true&limit=3")
   console.log(data)
 
   return (

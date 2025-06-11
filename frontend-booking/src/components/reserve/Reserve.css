@@ -76,3 +76,10 @@
     width: 100%;
     margin-top: 20px;
   }
+
+  .successMsg {
+  margin: 15px 0;
+  color: green;
+  font-weight: bold;
+  text-align: center;
+}
