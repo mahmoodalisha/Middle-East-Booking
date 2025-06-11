@@ -19,13 +19,14 @@ import Reserve from "../../../components/reserve/Reserve";
 
 
 const Hotel = () => {
+  const apiBase = process.env.REACT_APP_SERVER_URL;
   const location = useLocation();
   const id = location.pathname.split("/")[2];    //for the url `/hotels/id` i am using split method to get the id
   const [slideNumber, setSlideNumber] = useState(0);
   const [open, setOpen] = useState(false);
   const [openModal, setOpenModal] = useState(false); //openModal for rooms to reserve in hotel
 
-  const { data, loading, error } = useFetch(`http://localhost:8000/api/hotels/find/${id}`);  //keep in mind this url
+  const { data, loading, error } = useFetch(`${apiBase}/api/hotels/find/${id}`);  //keep in mind this url
   const { user } = useSelector((state) => state.auth); //get the user from redux store
   const navigate = useNavigate();
 

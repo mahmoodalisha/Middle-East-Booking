@@ -14,6 +14,7 @@ const LoginSchema = Yup.object().shape({
 });
 
 const Login = () => {
+  const apiBase = process.env.REACT_APP_SERVER_URL;
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [errorMessage, setErrorMessage] = useState("");
@@ -30,7 +31,7 @@ const Login = () => {
 
           try {
             const response = await axios.post(
-              "http://localhost:8000/api/auth/login",
+              `${apiBase}/api/auth/login`,
               values
             );
 

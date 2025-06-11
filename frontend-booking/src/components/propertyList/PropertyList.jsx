@@ -3,7 +3,8 @@ import useFetch from '../../hooks/useFetch';
 import './PropertyList.css';
 
 const PropertyList = () => {
-  const { data, loading, error } = useFetch("http://localhost:8000/api/hotels/countByType");
+  const apiBase = process.env.REACT_APP_SERVER_URL;
+  const { data, loading, error } = useFetch(`${apiBase}/api/hotels/countByType`);
   console.log(data);
 
   const images = [

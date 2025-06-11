@@ -2,8 +2,8 @@ import useFetch from '../../hooks/useFetch'
 import './Featured.css'
 
 const Featured = () => {
- 
-  const {data, loading, error} = useFetch("http://localhost:8000/api/hotels/countByCity?cities=dubai,abudhabi,sharjah") //keep in mind this url
+  const apiBase = process.env.REACT_APP_SERVER_URL;
+  const {data, loading, error} = useFetch(`${apiBase}/api/hotels/countByCity?cities=dubai,abudhabi,sharjah`)
   console.log(data)
 
   return (

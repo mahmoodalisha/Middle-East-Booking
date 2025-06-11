@@ -11,9 +11,10 @@ import { useNavigate } from "react-router-dom";
 //setOpen is a prop so that we would be able to close modal, reservation room again
 //fetch rooms of hotelId in here
 const Reserve = ({ setOpen, hotelId }) => {
+  const apiBase = process.env.REACT_APP_SERVER_URL;
   const [selectedRooms, setSelectedRooms] = useState([]);
   const [successMsg, setSuccessMsg] = useState("");
-  const { data, loading, error } = useFetch(`http://localhost:8000/api/hotels/room/${hotelId}`);
+  const { data, loading, error } = useFetch(`${apiBase}/api/hotels/room/${hotelId}`);
   const { dates } = useContext(SearchContext);
 
   const getDatesInRange = (startDate, endDate) => {
@@ -52,14 +53,14 @@ const Reserve = ({ setOpen, hotelId }) => {
     );
   };
 
-  const navigate = useNavigate();  //navigate back to homepage
+  const navigate = useNavigate();  
 
   const handleClick = async () => {
   try {
     // Step 1: Update room availability
     await Promise.all(
       selectedRooms.map((roomId) => {
-        return axios.put(`http://localhost:8000/api/rooms/availability/${roomId}`, {
+        return axios.put(`${apiBase}/api/rooms/availability/${roomId}`, {
         dates: alldates,
       }, {
         withCredentials: true 
@@ -68,10 +69,10 @@ const Reserve = ({ setOpen, hotelId }) => {
       })
     );
 
-    // Step 2: Create booking entries
+    
     await Promise.all(
       selectedRooms.map((roomId) =>
-        axios.post("http://localhost:8000/api/bookings", {
+        axios.post(`${apiBase}/api/bookings`, {
         hotelId,
         roomId,
         roomNumber: "",
@@ -85,10 +86,10 @@ const Reserve = ({ setOpen, hotelId }) => {
       )
     );
 
-    // Step 3: Show success message
+    
     setSuccessMsg("Your booking is successful!");
 
-    // Step 4: Optionally auto-close modal after delay
+    
     setTimeout(() => {
       setOpen(false);
       navigate("/");

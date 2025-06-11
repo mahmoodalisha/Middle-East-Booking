@@ -10,6 +10,7 @@ import SearchItem from "../../components/searchItem/SearchItem";
 import useFetch from "../../hooks/useFetch";
 
 const List = () => {
+  const apiBase = process.env.REACT_APP_SERVER_URL;
   const location = useLocation();
   const [destination, setDestination] = useState(location.state.destination);
   const [dates, setDates] = useState(location.state.dates);
@@ -19,7 +20,7 @@ const List = () => {
   const [max, setMax] = useState(undefined);
 
   const { data, loading, error, reFetch } = useFetch(
-    `http://localhost:8000/api/hotels?city=${destination}&min=${min || 0 }&max=${max || 999}`  //keep in mind this url
+    `${apiBase}/api/hotels?city=${destination}&min=${min || 0 }&max=${max || 999}`  //keep in mind this url
   );
 
   const handleClick = () => {
