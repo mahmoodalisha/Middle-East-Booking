@@ -16,7 +16,10 @@ const bookingsRoute = require('./routes/bookings');
 
 
 const app = express();
+const cors = require("cors");
+
 app.use(cors());
+
 // Add Cache-Control middleware
 app.use((req, res, next) => {
     res.set('Cache-Control', 'no-store');
@@ -77,7 +80,7 @@ app.get('*', (req, res) => {
 
 
 
-app.listen(8000, () => {
-    //connect();
-    console.log('Server is running on port 8000');
+const PORT = process.env.PORT || 8000;
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
 });

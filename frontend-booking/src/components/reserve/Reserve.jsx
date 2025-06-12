@@ -16,6 +16,8 @@ const Reserve = ({ setOpen, hotelId }) => {
   const [successMsg, setSuccessMsg] = useState("");
   const { data, loading, error } = useFetch(`${apiBase}/api/hotels/room/${hotelId}`);
   const { dates } = useContext(SearchContext);
+  const navigate = useNavigate(); 
+  const token = localStorage.getItem("token"); 
 
   const getDatesInRange = (startDate, endDate) => {
     const start = new Date(startDate);
@@ -43,62 +45,94 @@ const Reserve = ({ setOpen, hotelId }) => {
     return !isFound;
   };
 
-  const handleSelect = (e) => {
-    const checked = e.target.checked;
-    const value = e.target.value;
-    setSelectedRooms(
-      checked
-        ? [...selectedRooms, value]
-        : selectedRooms.filter((item) => item !== value)
-    );
+  const handleSelect = (e, roomNumberValue) => {
+  const checked = e.target.checked;
+  const roomData = {
+    id: e.target.value,
+    number: roomNumberValue
   };
+  setSelectedRooms((prev) =>
+    checked
+      ? [...prev, roomData]
+      : prev.filter((item) => item.id !== roomData.id)
+  );
+};
 
-  const navigate = useNavigate();  
+
+   
 
   const handleClick = async () => {
-  try {
-    // Step 1: Update room availability
-    await Promise.all(
-      selectedRooms.map((roomId) => {
-        return axios.put(`${apiBase}/api/rooms/availability/${roomId}`, {
-        dates: alldates,
-      }, {
-        withCredentials: true 
-      });
+    //STEP 1: Log and validate the token before proceeding
+    console.log("Sending booking request with token:", token); 
 
-      })
-    );
+    if (!token) {
+    console.warn("JWT token missing — login required.");
+    setSuccessMsg("Please log in first.");
+    return;
+    }
+    try {
+      // STEP 2: Proceed with updating availability
+      await Promise.all(
+        selectedRooms.map((room) =>
+          axios.put(
+            `${apiBase}/api/rooms/availability/${room.id}`,
+            { dates: alldates },
+            {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+          )
+        )
+      );
 
-    
-    await Promise.all(
-      selectedRooms.map((roomId) =>
-        axios.post(`${apiBase}/api/bookings`, {
-        hotelId,
-        roomId,
-        roomNumber: "",
-        startDate: dates[0].startDate,
-        endDate: dates[0].endDate,
-        totalAmount: 1000,
-      }, {
-        withCredentials: true 
-    })
+      // STEP 3: Calculate total amount
+      const numNights =
+        (new Date(dates[0].endDate) - new Date(dates[0].startDate)) /
+        (1000 * 60 * 60 * 24);
 
-      )
-    );
+      const totalAmount = selectedRooms.reduce((acc, room) => {
+        const roomData = data
+          .flatMap((item) =>
+            item.roomNumbers.map((rn) => ({
+              ...rn,
+              price: item.price,
+            }))
+          )
+          .find((r) => r._id === room.id);
 
-    
-    setSuccessMsg("Your booking is successful!");
+        return acc + roomData.price * numNights;
+      }, 0);
 
-    
-    setTimeout(() => {
-      setOpen(false);
-      navigate("/");
-    }, 2000);
-  } catch (err) {
-    console.error(err);
-    setSuccessMsg("Booking failed. Please try again.");
-  }
-};
+      // STEP 4: Create booking
+      await axios.post(
+        `${apiBase}/api/bookings`,
+        {
+          hotelId,
+          roomId: selectedRooms.map((room) => room.id),
+          roomNumber: selectedRooms.map((room) => room.number),
+          startDate: dates[0].startDate,
+          endDate: dates[0].endDate,
+          totalAmount,
+        },
+        {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+      );
+
+      setSuccessMsg("Your booking is successful!");
+
+      setTimeout(() => {
+        setOpen(false);
+        navigate("/");
+      }, 2000);
+    } catch (err) {
+      console.error("Booking Error:", err.response?.data || err.message);
+      setSuccessMsg("Booking failed. Please try again.");
+    }
+  };
 
   return (
     <div className="reserve">
@@ -124,11 +158,12 @@ const Reserve = ({ setOpen, hotelId }) => {
                 <div className="room">
                   <label>{roomNumber.number}</label>
                   <input
-                    type="checkbox"
-                    value={roomNumber._id}
-                    onChange={handleSelect}
-                    disabled={!isAvailable(roomNumber)}
+                  type="checkbox"
+                  value={roomNumber._id}
+                  onChange={(e) => handleSelect(e, roomNumber.number)}
+                  disabled={!isAvailable(roomNumber)}
                   />
+
                 </div>
               ))}
             </div>

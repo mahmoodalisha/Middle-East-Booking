@@ -37,6 +37,7 @@ const Login = () => {
 
             if (response.status === 200) {
               const userData = response.data;
+              console.log("JWT Token:", userData.token);
               localStorage.setItem("token", userData.token);
               localStorage.setItem("userId", userData.details._id);
               localStorage.setItem("user", JSON.stringify(userData.details));

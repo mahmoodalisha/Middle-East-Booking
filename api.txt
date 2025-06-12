@@ -27,3 +27,14 @@ hey there, you are verified and now can dlt your acc
 
 DELETE http://localhost:8000/api/users/668079c3dbeae54a35a8b051
 "User has been deleted."
+
+POST http://localhost:8000/api/bookings
+Request body
+{
+  "hotelId": "66548bd74993e1d528fb252a",
+  "roomId": ["66563e32ab50d48f9fa84bb8"],
+  "roomNumber": [101, 303],
+  "startDate": "2025-06-12",
+  "endDate": "2025-06-14",
+  "totalAmount": 5000
+}
