@@ -16,7 +16,6 @@ const bookingsRoute = require('./routes/bookings');
 
 
 const app = express();
-const cors = require("cors");
 
 app.use(cors());
 
