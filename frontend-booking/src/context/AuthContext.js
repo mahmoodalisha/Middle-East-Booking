@@ -16,24 +16,30 @@ const AuthReducer = (state, action) => {
         loading: true,
         error: null,
       };
+
     case "LOGIN_SUCCESS":
       return {
         user: action.payload,
         loading: false,
         error: null,
       };
+
     case "LOGIN_FAILURE":
       return {
         user: null,
         loading: false,
         error: action.payload,
       };
+
     case "LOGOUT":
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
       return {
         user: null,
         loading: false,
         error: null,
       };
+
     default:
       return state;
   }
@@ -42,8 +48,6 @@ const AuthReducer = (state, action) => {
 export const AuthContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(AuthReducer, INITIAL_STATE);
 
-
-  //when the user logs in i can store him in local storage, when he refreshes the page he is not gonna logout
   useEffect(() => {
     localStorage.setItem("user", JSON.stringify(state.user));
   }, [state.user]);

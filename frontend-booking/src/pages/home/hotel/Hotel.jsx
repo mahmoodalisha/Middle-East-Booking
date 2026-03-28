@@ -14,7 +14,7 @@ import { useContext, useState } from "react";
 import useFetch from "../../../hooks/useFetch";
 import { useLocation, useNavigate } from "react-router-dom";
 import { SearchContext } from "../../../context/SearchContext";
-import { useSelector } from "react-redux";
+import { AuthContext } from "../../../context/AuthContext";
 import Reserve from "../../../components/reserve/Reserve";
 
 
@@ -27,7 +27,7 @@ const Hotel = () => {
   const [openModal, setOpenModal] = useState(false); //openModal for rooms to reserve in hotel
 
   const { data, loading, error } = useFetch(`${apiBase}/api/hotels/find/${id}`);  //keep in mind this url
-  const { user } = useSelector((state) => state.auth); //get the user from redux store
+  const { user } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const { dates, options } = useContext(SearchContext);
@@ -71,13 +71,16 @@ const Hotel = () => {
     }
   };
   return (
-    <div>
-      <Navbar />
-      <Header type="list" />
-      {loading ? (
-        "loading"
-      ) : (
-        <div className="hotelContainer">
+  <div>
+    <Navbar />
+    <Header type="list" />
+
+    {loading ? (
+      <div className="loading">Loading...</div>
+    ) : error ? (
+      <div className="error">Something went wrong. Please try again.</div>
+    ) : (
+      <div className="hotelContainer">
           {open && (
             <div className="slider">
               <FontAwesomeIcon

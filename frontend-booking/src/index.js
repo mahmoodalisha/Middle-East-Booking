@@ -1,23 +1,20 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import { SearchContextProvider } from "./context/SearchContext";
-import { AuthContextProvider } from './context/AuthContext';
-import { Provider } from 'react-redux'; // ✅ import Redux Provider
-import store from './redux/store'; 
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+import { SearchContextProvider } from "./context/SearchContext";
+import { AuthContextProvider } from "./context/AuthContext";
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+
 root.render(
-  
   <React.StrictMode>
-    <Provider store={store}>
     <AuthContextProvider>
-    <SearchContextProvider>
-    <App />
-    </SearchContextProvider>
+      <SearchContextProvider>
+        <App />
+      </SearchContextProvider>
     </AuthContextProvider>
-    </Provider>
   </React.StrictMode>
 );
 

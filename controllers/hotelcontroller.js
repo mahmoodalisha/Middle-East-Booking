@@ -45,6 +45,7 @@ const getHotel = async (req, res, next) => {
     }
 };
 
+//The controller responsible for fetching hotels based on any city name (like London, Tokyo, etc.) 
 const getHotels = async (req, res, next) => {
     const { min, max, limit, featured, ...others } = req.query;
   

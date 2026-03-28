@@ -1,12 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { setUser } from "../../redux/slices/authSlice";
 import "./Login.css";
 
+import { AuthContext } from "../../context/AuthContext";
 
 const LoginSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Required"),
@@ -16,7 +15,7 @@ const LoginSchema = Yup.object().shape({
 const Login = () => {
   const apiBase = process.env.REACT_APP_SERVER_URL;
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const { dispatch } = useContext(AuthContext);
   const [errorMessage, setErrorMessage] = useState("");
 
   return (
@@ -29,30 +28,39 @@ const Login = () => {
         onSubmit={async (values) => {
           setErrorMessage("");
 
+          dispatch({ type: "LOGIN_START" });
+
           try {
             const response = await axios.post(
               `${apiBase}/api/auth/login`,
               values
             );
 
-            if (response.status === 200) {
-              const userData = response.data;
-              console.log("JWT Token:", userData.token);
-              localStorage.setItem("token", userData.token);
-              localStorage.setItem("userId", userData.details._id);
-              localStorage.setItem("user", JSON.stringify(userData.details));
-              localStorage.setItem("username", userData.username);
+            const userData = response.data;
 
-              dispatch(setUser({
+            const user = {
               username: userData.username,
               email: userData.details.email,
               id: userData.details._id,
-              }));
-              // Store in Redux
-              navigate("/"); // Redirect to homepage
-            }
+              token: userData.token,
+            };
+
+            localStorage.setItem("user", JSON.stringify(user));
+            localStorage.setItem("token", userData.token);
+            localStorage.setItem("userId", userData.details._id);
+
+            dispatch({
+              type: "LOGIN_SUCCESS",
+              payload: user,
+            });
+
+            navigate("/");
           } catch (error) {
-            console.error("Login failed:", error);
+            dispatch({
+              type: "LOGIN_FAILURE",
+              payload: "Invalid email or password",
+            });
+
             setErrorMessage("Login failed. Please check your credentials.");
           }
         }}
@@ -83,6 +91,7 @@ const Login = () => {
       <p>
         Forgot your password? <a href="/forgot-password">Reset here</a>
       </p>
+
       <p>
         New user? <a href="/register">Register here</a>
       </p>
