@@ -1,9 +1,6 @@
 import './resort.css'
-import useFetch from '../../hooks/useFetch';
 const FeaturedProperties = () => {
-  const apiBase = process.env.REACT_APP_SERVER_URL;
-  const {data, loading, error} = useFetch(`${apiBase}/api/hotels?featured=true&limit=3`)
-  console.log(data)
+  
 
   return (
     <div className='fp'>

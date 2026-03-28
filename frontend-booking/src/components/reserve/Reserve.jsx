@@ -19,6 +19,13 @@ const Reserve = ({ setOpen, hotelId }) => {
   const navigate = useNavigate(); 
   const token = localStorage.getItem("token"); 
 
+  if (loading) {
+  return <div className="reserve">Loading...</div>;
+}
+
+if (error) {
+  return <div className="reserve">Something went wrong!</div>;
+}
   const getDatesInRange = (startDate, endDate) => {
     const start = new Date(startDate);
     const end = new Date(endDate);

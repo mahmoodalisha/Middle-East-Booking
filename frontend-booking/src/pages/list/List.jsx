@@ -15,7 +15,7 @@ const List = () => {
   const [destination, setDestination] = useState(location.state.destination);
   const [dates, setDates] = useState(location.state.dates);
   const [openDate, setOpenDate] = useState(false);
-  const [options, setOptions] = useState(location.state.options);
+  const [options,] = useState(location.state.options);
   const [min, setMin] = useState(undefined);
   const [max, setMax] = useState(undefined);
 
@@ -37,7 +37,11 @@ const List = () => {
             <div className="justsearch"><h1 className="lsTitle">Search</h1></div>
             <div className="lsItem">
               <label>Destination</label>
-              <input placeholder={destination} type="text" />
+              <input
+                type="text"
+                value={destination}
+                onChange={(e) => setDestination(e.target.value)} 
+              />
             </div>
             <div className="lsItem">
               <label>Check-in Date</label>
@@ -112,8 +116,12 @@ const List = () => {
         </div>
         <div className="listResult">
             {loading ? (
-              "loading"
-            ) : (
+              <div>Loading...</div>
+            ) : 
+              error ? (
+            <div>Something went wrong!</div>
+          ) :
+            (
               <>
                 {data.map((item) => (     //passing item as a parameter or rather a prop
                   <SearchItem item={item} key={item._id} />  //assigns item to the SearchItem component destructuring
