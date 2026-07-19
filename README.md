@@ -1,57 +1,116 @@
-﻿This Hotel Booking System is a full-stack web application developed using the MERN (MongoDB, Express.js, React.js, Node.js) stack. The system allows users to browse, search, and book hotel rooms in various cities with ease. It includes essential features such as search functionality, booking calendars, and an availability checker to ensure a smooth booking experience.
+﻿# 🏨 Middle East Booking
 
-Features
-Search Functionality: Users can search for available rooms based on location and date.
-Booking Calendar: Integrated booking calendar to display available and booked dates, ensuring users can make informed decisions.
-Availability Checker: Prevents double bookings by verifying room availability before confirming a reservation.
-Data Management: Efficient storage and retrieval of hotel, room, and booking data using MongoDB.
-Technologies Used
-Frontend:
+A full-stack hotel booking platform that allows users to search hotels, view available room categories, select specific physical rooms, and complete secure bookings.
 
-React.js: For building the user interface and handling client-side logic.
-Redux: For managing the application state.
-Material-UI: For designing a responsive and user-friendly interface.
-Backend:
+The application is built using the MERN stack and implements backend-controlled booking logic with MongoDB transactions to prevent inconsistent bookings and partial database updates.
 
-Node.js: As the server-side runtime environment.
-Express.js: For handling API requests and routing.
-MongoDB: For storing and managing hotel, room, and booking data.
-Installation
-Clone the repository:
+---
 
+# 📌 Features
+## User Authentication
 
-git clone https://github.com/mahmoodalisha/Middle-East-Booking.git
-Navigate to the project directory:
+- User registration and login functionality.
+- JWT-based authentication.
+- Protected booking routes using authentication middleware.
+- Users can:
+  - Create an account.
+  - Login securely.
+  - View personalized navigation state.
+  - Logout from the application.
 
-Install dependencies:
-Backend:
-cd API
-npm install
+## Hotel Search & Navigation
 
-Frontend:
+Users can:
+- Search hotels based on destination.
+- Select check-in and check-out dates using react date range calendar.
+- View available hotels.
+- Navigate between:
+  - Home page
+  - Hotel listing page
+  - Login/Register pages
+  - Booking modal
 
-cd frontend
-npm install
+The navigation bar dynamically changes based on authentication state:
 
-Start the application:
+### Guest User
+Displays:
+- Register button
+- Login button
 
-Backend:
-cd API
-npm start
+### Authenticated User
+Displays:
+- Welcome message
+- Username
+- Logout button
 
-Frontend:
+---
 
-cd frontend-booking
-npm start
-Access the application:
-Open your browser and navigate to http://localhost:3000.
+## 🛠 Tech Stack
 
-Usage
-Search: Enter the desired city and dates to find available rooms.
-Book a Room: Select a room from the search results, check the availability, and proceed with the booking.
-View Bookings: Users can view their booking history and manage their reservations.
-Contributing
-Contributions are welcome! Please fork the repository and submit a pull request with your changes.
+| Category | Technologies |
+| -------- | ------------ |
+| **Frontend** | React.js, React Router DOM, Context API, Axios, React Date Range, Font Awesome, CSS |
+| **Backend** | Node.js, Express.js, REST APIs |
+| **Database** | MongoDB Atlas, Mongoose |
+| **Authentication** | JWT (JSON Web Token), Protected Routes |
+| **State Management** | React Context API |
+| **HTTP Client** | Axios |
+| **Development Tools** | Git, GitHub, npm |
+
+---
+
+## Techniques used for handling double booking conflicts:-                      
+- Backend controller handles complete booking logic with conflict detection using room availability
+- MongoDB Transactions used that follows ACID principles
+- Rollback on failure                 
+- Prevent partial updates       
+- Prevents race conditions up to some extent
+- Frontend does not update room availability
+
+```
+startTransaction()
+↓
+Generate dates
+↓
+findOne(...)
+↓
+Booking.create(...)
+↓
+commitTransaction()
+```
+
+If booking creation fails:
+```
+startTransaction()
+↓
+Reserve room
+↓
+Create booking
+↓
+ERROR
+↓
+abortTransaction()
+↓
+MongoDB removes room update
+```
+
+## Schema
+```
+Hotel
+|
+|
++---- Luxurious Rooms
+|          |
+|          +---- Room 101
+|          +---- Room 102
+|
+|
++---- Standard Rooms
+           |
+           +---- Room 201
+           +---- Room 202
+```
+
 ![Screenshot 2024-08-18 194843](https://github.com/user-attachments/assets/59e75557-dc66-472c-8279-b0fc72b95962)
 
 
@@ -59,11 +118,3 @@ Contributions are welcome! Please fork the repository and submit a pull request 
 
 
 ![Screenshot 2024-08-18 195006](https://github.com/user-attachments/assets/46b3f9dc-9fdd-4910-9c7a-b392362981e2)
-
-
-![Screenshot 2024-08-18 195022](https://github.com/user-attachments/assets/ec15332a-ab20-44f5-a9f4-e017ed6f9944)
-
-![Screenshot 2024-08-18 195036](https://github.com/user-attachments/assets/934330e1-20f8-4c56-8606-247e70b3affa)
-
-![Screenshot 2024-08-18 195110](https://github.com/user-attachments/assets/083a7149-feea-4690-8ba9-2aecadadeb6a)
-
