@@ -78,22 +78,7 @@ if (error) {
     return;
     }
     try {
-      // STEP 2: Proceed with updating availability
-      await Promise.all(
-        selectedRooms.map((room) =>
-          axios.put(
-            `${apiBase}/api/rooms/availability/${room.id}`,
-            { dates: alldates },
-            {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-          )
-        )
-      );
-
-      // STEP 3: Calculate total amount
+      // Calculate total amount
       const numNights =
         (new Date(dates[0].endDate) - new Date(dates[0].startDate)) /
         (1000 * 60 * 60 * 24);

@@ -1,29 +1,21 @@
-const express = require("express");
-const Booking = require("../models/Booking");
-const { verifyToken } = require("../utils/verifyToken");
-const router = express.Router();
+const express=require("express");
+
+const router=express.Router();
+
+const {
+    createBooking
+}=require("../controllers/bookingcontroller");
+
+const {
+    verifyToken
+}=require("../utils/verifyToken");
 
 
-router.post("/", verifyToken, async (req, res, next) => {
-  try {
-    const { hotelId, roomId, roomNumber, startDate, endDate, totalAmount } = req.body;
+router.post(
+    "/",
+    verifyToken,
+    createBooking
+);
 
-    const newBooking = new Booking({
-      userId: req.user.id,
-      hotelId,
-      roomId,
-      roomNumber,
-      startDate,
-      endDate,
-      totalAmount,
-      isPaid: false
-    });
 
-    const savedBooking = await newBooking.save();
-    res.status(200).json(savedBooking);
-  } catch (err) {
-    next(err);
-  }
-});
-
-module.exports = router;
+module.exports=router;

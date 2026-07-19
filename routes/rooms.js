@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { createRoom, updateRoom, updateRoomAvailability, deleteRoom, getRoom, getRooms } = require('../controllers/roomcontroller');
+const { createRoom, updateRoom, deleteRoom, getRoom, getRooms } = require('../controllers/roomcontroller');
 const { verifyAdmin } = require('../utils/verifyToken');
 
 // CREATE
@@ -8,7 +8,7 @@ router.post("/:hotelid", createRoom);
 
 // UPDATE
 router.put("/:id", updateRoom);
-router.put("/availability/:id", updateRoomAvailability);
+
 
 // DELETE
 router.delete("/:id", deleteRoom);
