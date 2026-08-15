@@ -19,7 +19,7 @@ const Featured = () => {
         <>
           <div className="featuredItem">
             <img
-              src="https://media.istockphoto.com/id/1333035210/photo/sunset-view-of-the-dubai-marina-and-jbr-area-and-the-famous-ferris-wheel-and-golden-sand.jpg?s=612x612&w=0&k=20&c=ONRt8hlovwg0m8f6Q3OG5Spavaer2JCaAioUE-XM_r8="
+              src="https://images.unsplash.com/photo-1608991156162-3c55b3cf05d3?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGR1YmFpJTIwbmlnaHR8ZW58MHx8MHx8fDA%3D"
               alt=""
               className="featuredImg"
             />
@@ -41,7 +41,7 @@ const Featured = () => {
 
           <div className="featuredItem">
             <img
-              src="https://st2.depositphotos.com/1007593/6773/i/450/depositphotos_67738841-stock-photo-abu-dhabi-skyline.jpg"
+              src="https://i.etsystatic.com/25397710/r/il/f08db4/3454964276/il_1080xN.3454964276_jjgx.jpg"
               alt=""
               className="featuredImg"
             />

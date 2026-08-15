@@ -1,40 +1,112 @@
-import { Link } from 'react-router-dom'
-import './SearchItem.css'
+import { Link } from "react-router-dom";
+import "./SearchItem.css";
 
-// for /hotels route
-//fetching item to List.jsx
-
-
-//two components linked to /hotels route, list.jsx and searchItem.jsx
-const SearchItem = ({item}) => {
-  console.log("SearchItem data:", item); 
+// Used on the /hotels route
+const SearchItem = ({ item }) => {
   return (
-    <div className='searchItem'>
-        <img src={item.photos[0]} alt="" 
-        className='siImg'/>
-        <div className="siDesc">
-        <h1 div className="siTitle">{item.name}</h1>
-        {/* <span className='siDistance'>{item.distance}</span> */}
-        <span className='siTaxiOp'>Free Cancellation</span>
-        <span className='siSubtitle'>Studio Apartments</span>
-        <span className='siFeatures'>{item.desc}</span>
-        
-        
+    <article className="searchItem">
+
+      {/* HOTEL IMAGE */}
+      <div className="siImageWrapper">
+        <img
+          src={item.photos?.[0]}
+          alt={item.name}
+          className="siImg"
+        />
+      </div>
+
+
+      {/* HOTEL INFORMATION */}
+      <div className="siDesc">
+
+        <div className="siMainInfo">
+
+          <h2 className="siTitle">
+            {item.name}
+          </h2>
+
+          <span className="siLocation">
+            📍 {item.city}
+          </span>
+
+          <span className="siSubtitle">
+            Studio Apartments
+          </span>
+
         </div>
-        <div className="siDetails">
-          {item.rating && <div className="siRating">  
-            <span>Excellent</span>
-            <button>{item.rating}</button>
-          </div>}
-          
-          <div className="siDetailTexts">
-            <span className="siPrice">${item.cheapestPrice}</span>
-            <span className="siTaxOp">Includes taxes and fees</span>
-            <Link to = {`/hotels/${item._id}`}><button className='siCheckButton'>See availability</button></Link>
+
+
+        <div className="siFeatures">
+
+          <span className="siFeature">
+            ✓ Free cancellation
+          </span>
+
+          <span className="siFeature">
+            ✓ Breakfast available
+          </span>
+
+          {item.desc && (
+            <p className="siDescription">
+              {item.desc}
+            </p>
+          )}
+
+        </div>
+
+      </div>
+
+
+      {/* RATING + PRICE */}
+      <div className="siDetails">
+
+        {item.rating && (
+          <div className="siRating">
+
+            <div className="siRatingText">
+              <span className="siRatingLabel">
+                Excellent
+              </span>
+
+              <span className="siRatingReviews">
+                Highly rated
+              </span>
+            </div>
+
+            <span className="siRatingScore">
+              {item.rating}
+            </span>
+
           </div>
+        )}
+
+
+        <div className="siDetailTexts">
+
+          <span className="siPrice">
+            ${item.cheapestPrice}
+            <small> / night</small>
+          </span>
+
+          <span className="siTaxOp">
+            Includes taxes and fees
+          </span>
+
+          <Link
+            to={`/hotels/${item._id}`}
+            className="siCheckLink"
+          >
+            <button className="siCheckButton">
+              See availability
+            </button>
+          </Link>
+
         </div>
-    </div>
-  )
-}
-// condition for rating if item.rating then show me the rating 
-export default SearchItem
+
+      </div>
+
+    </article>
+  );
+};
+
+export default SearchItem;

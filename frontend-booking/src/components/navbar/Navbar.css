@@ -1,23 +1,431 @@
-.navbar{
-    height: 50px;
-    background-color: #0073e6;
+/* =========================================
+   NAVBAR
+   ========================================= */
+
+.navbar {
+    width: 100%;
+    height: 68px;
+
+    background: linear-gradient(
+        135deg,
+        #003580 0%,
+        #0057a8 55%,
+        #0073e6 100%
+    );
+
+    color: white;
+
     display: flex;
     justify-content: center;
+    align-items: center;
+
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.15);
+
+    position: relative;
+    z-index: 1000;
+
+    box-sizing: border-box;
 }
-.navContainer{
+
+
+/* =========================================
+   NAV CONTAINER
+   ========================================= */
+
+.navContainer {
     width: 100%;
-    max-width: 1024px;
-    color: white;
+    max-width: 1100px;
+
+    padding: 0 25px;
+
     display: flex;
     align-items: center;
+    justify-content: space-between;
+
+    box-sizing: border-box;
 }
-.logo{
+
+
+/* =========================================
+   LOGO
+   ========================================= */
+
+.navLogo {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+
+    color: white;
+    text-decoration: none;
+
+    transition: opacity 0.2s ease;
+}
+
+.navLogo:hover {
+    opacity: 0.9;
+}
+
+
+/* Hotel icon */
+
+.logoIcon {
+    width: 38px;
+    height: 38px;
+
+    border-radius: 10px;
+
+    background: rgba(255, 255, 255, 0.15);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 18px;
+
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+
+/* Logo text */
+
+.logoText {
+    display: flex;
+    flex-direction: column;
+
+    line-height: 1;
+}
+
+.logoMain {
+    font-size: 21px;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+}
+
+.logoSub {
+    font-size: 8px;
+    font-weight: 600;
+
+    letter-spacing: 2.5px;
+
+    opacity: 0.75;
+
+    margin-top: 4px;
+}
+
+
+/* =========================================
+   NAV ITEMS
+   ========================================= */
+
+.navItems {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+
+/* =========================================
+   REGISTER
+   ========================================= */
+
+.navLink {
+    color: white;
+
+    text-decoration: none;
+
+    font-size: 14px;
     font-weight: 500;
+
+    padding: 10px 14px;
+
+    border-radius: 7px;
+
+    transition: background-color 0.2s ease;
 }
-.navButton{
-    margin-left: 20px;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
+
+.navLink:hover {
+    background-color: rgba(255, 255, 255, 0.12);
+}
+
+
+/* =========================================
+   LOGIN
+   ========================================= */
+
+.loginButton {
+    background-color: white;
+
     color: #003580;
+
+    text-decoration: none;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    padding: 10px 20px;
+
+    border-radius: 7px;
+
+    transition: all 0.2s ease;
+
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+}
+
+.loginButton:hover {
+    transform: translateY(-1px);
+
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.18);
+}
+
+
+/* =========================================
+   USER PROFILE
+   ========================================= */
+
+.userProfile {
+    display: flex;
+    align-items: center;
+
+    gap: 9px;
+
+    padding: 6px 12px 6px 7px;
+
+    background: rgba(255, 255, 255, 0.10);
+
+    border: 1px solid rgba(255, 255, 255, 0.15);
+
+    border-radius: 30px;
+}
+
+
+/* User icon */
+
+.userIcon {
+    width: 34px;
+    height: 34px;
+
+    border-radius: 50%;
+
+    background: white;
+
+    color: #0057a8;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 14px;
+}
+
+
+/* User text */
+
+.userInfo {
+    display: flex;
+    flex-direction: column;
+
+    line-height: 1.2;
+}
+
+.welcomeText {
+    font-size: 10px;
+
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.username {
+    font-size: 14px;
+
+    font-weight: 600;
+
+    color: white;
+}
+
+
+/* =========================================
+   LOGOUT
+   ========================================= */
+
+.logoutButton {
+    display: flex;
+    align-items: center;
+
+    gap: 7px;
+
+    border: 1px solid rgba(255, 255, 255, 0.3);
+
+    background: transparent;
+
+    color: white;
+
+    padding: 9px 14px;
+
+    border-radius: 7px;
+
+    font-size: 13px;
+
+    font-weight: 500;
+
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+}
+
+.logoutButton:hover {
+    background: rgba(255, 255, 255, 0.12);
+
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+
+/* =========================================
+   TABLET
+   ========================================= */
+
+@media (max-width: 768px) {
+
+    .navbar {
+        height: 64px;
+    }
+
+    .navContainer {
+        padding: 0 18px;
+    }
+
+    .logoMain {
+        font-size: 19px;
+    }
+
+    .logoSub {
+        font-size: 7px;
+        letter-spacing: 2px;
+    }
+
+    .logoIcon {
+        width: 35px;
+        height: 35px;
+    }
+
+    .userProfile {
+        padding-right: 9px;
+    }
+
+    .userInfo {
+        display: none;
+    }
+
+    .logoutButton {
+        padding: 9px 12px;
+    }
+}
+
+
+/* =========================================
+   MOBILE
+   ========================================= */
+
+@media (max-width: 500px) {
+
+    .navbar {
+        height: 60px;
+    }
+
+    .navContainer {
+        padding: 0 12px;
+    }
+
+    .navLogo {
+        gap: 8px;
+    }
+
+    .logoIcon {
+        width: 32px;
+        height: 32px;
+
+        border-radius: 8px;
+
+        font-size: 15px;
+    }
+
+    .logoMain {
+        font-size: 17px;
+    }
+
+    .logoSub {
+        font-size: 6px;
+        letter-spacing: 1.8px;
+    }
+
+    .navItems {
+        gap: 6px;
+    }
+
+    .navLink {
+        font-size: 12px;
+        padding: 8px 7px;
+    }
+
+    .loginButton {
+        font-size: 12px;
+        padding: 8px 13px;
+    }
+
+    .userProfile {
+        padding: 4px;
+        border: none;
+        background: transparent;
+    }
+
+    .userIcon {
+        width: 32px;
+        height: 32px;
+    }
+
+    .logoutButton {
+        width: 32px;
+        height: 32px;
+
+        padding: 0;
+
+        justify-content: center;
+
+        border-radius: 50%;
+    }
+
+    .logoutButton span {
+        display: none;
+    }
+}
+
+
+/* =========================================
+   VERY SMALL PHONES
+   ========================================= */
+
+@media (max-width: 360px) {
+
+    .navContainer {
+        padding: 0 9px;
+    }
+
+    .logoSub {
+        display: none;
+    }
+
+    .logoMain {
+        font-size: 16px;
+    }
+
+    .logoIcon {
+        width: 30px;
+        height: 30px;
+    }
+
+    .navLink {
+        padding: 7px 5px;
+    }
+
+    .loginButton {
+        padding: 7px 10px;
+    }
 }

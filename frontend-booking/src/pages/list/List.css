@@ -1,89 +1,479 @@
-.listContainer{
+/* =========================================
+   PAGE
+   ========================================= */
+
+.listPage {
+    min-height: 100vh;
+    background-color: #f5f7fa;
+}
+
+.listContainer {
+    width: 100%;
     display: flex;
     justify-content: center;
-    margin-top: 20px;
+    padding: 30px 20px 60px;
+    box-sizing: border-box;
 }
-.listWrapper{
+
+.listWrapper {
     width: 100%;
-    max-width: 900px;
-    display: flex;
-    gap: 20px;
+    max-width: 1200px;
+    display: grid;
+    grid-template-columns: 300px minmax(0, 1fr);
+    gap: 28px;
+    align-items: start;
 }
-.listSearch{
-    flex:1;
-    background-color: white;
-    padding: 10px;
-    border-radius: 10px;
+
+
+/* =========================================
+   SEARCH / FILTER CARD
+   ========================================= */
+
+.listSearch {
+    background-color: #ffffff;
+    border-radius: 12px;
+    border: 1px solid #e3e7ed;
     position: sticky;
-    top: 10px;
-    height: max-content; 
-    box-shadow: 20px 20px 15px rgba(0, 0, 0, 0.4);
-    border: 1px solid #0071c2
+    top: 20px;
+    overflow: visible;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
 }
-.listTitle{
+
+
+/* =========================================
+   SEARCH HEADER
+   ========================================= */
+
+.searchHeader {
+    background: linear-gradient(135deg, #0073e6, #005bb5);
+    color: white;
+    padding: 20px;
+    border-radius: 12px 12px 0 0;
+}
+
+.searchHeader h2 {
+    margin: 0;
     font-size: 20px;
-    color: #555;
-    margin-bottom: 10px;
+    font-weight: 600;
 }
-.listResult{
-    flex: 3;
+
+.searchHeader p {
+    margin: 5px 0 0;
+    font-size: 13px;
+    opacity: 0.9;
 }
-.lsItem{
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    margin-bottom: 10px;
+
+
+/* =========================================
+   FILTER CONTENT
+   ========================================= */
+
+.filterSection {
+    padding: 20px;
 }
-.lsItem>label{
-    font-size: 12px;
-    
+
+.filterItem {
+    margin-bottom: 20px;
+    position: relative;
 }
-.lsItem>input{
-    height: 10px;
-    border: none;
-    padding: 5px;
-    display: flex;
-    
+
+.filterItem > label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 8px;
 }
-.lsItem>span{
-    height: 30px;
-    padding: 5px;
-    background-color: white;
+
+
+/* =========================================
+   DESTINATION INPUT
+   ========================================= */
+
+.inputWrapper {
+    height: 46px;
+    border: 1px solid #d8dde5;
+    border-radius: 7px;
     display: flex;
     align-items: center;
+    padding: 0 12px;
+    background-color: #fff;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    box-sizing: border-box;
+}
+
+.inputWrapper:focus-within {
+    border-color: #0073e6;
+    box-shadow: 0 0 0 3px rgba(0, 115, 230, 0.1);
+}
+
+.inputIcon {
+    margin-right: 9px;
+    font-size: 15px;
+}
+
+.inputWrapper input {
+    border: none;
+    outline: none;
+    width: 100%;
+    font-size: 13px;
+    color: #333;
+    background: transparent;
+}
+
+.inputWrapper input::placeholder {
+    color: #9aa1ab;
+}
+
+
+/* =========================================
+   DATE INPUT
+   ========================================= */
+
+.dateInput {
+    min-height: 46px;
+    border: 1px solid #d8dde5;
+    border-radius: 7px;
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+    box-sizing: border-box;
     cursor: pointer;
+    color: #555;
+    font-size: 13px;
+    background-color: white;
+    transition: border-color 0.2s;
 }
-.lsOptionText{
-    margin-bottom: 10px;
+
+.dateInput:hover {
+    border-color: #0073e6;
 }
-.lsOptionItem{
+
+.listDatePicker {
+    position: absolute;
+    left: 0;
+    top: 75px;
+    z-index: 100;
+    background: white;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+
+/* =========================================
+   SECTION TITLES
+   ========================================= */
+
+.filterSectionTitle {
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+    padding-top: 5px;
+    margin-bottom: 12px;
+}
+
+
+/* =========================================
+   PRICE
+   ========================================= */
+
+.priceInputs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 22px;
+}
+
+.priceInput label {
+    display: block;
+    font-size: 11px;
+    color: #777;
+    margin-bottom: 5px;
+}
+
+.priceInput input {
+    width: 100%;
+    height: 40px;
+    border: 1px solid #d8dde5;
+    border-radius: 6px;
+    padding: 0 8px;
+    box-sizing: border-box;
+    outline: none;
+}
+
+.priceInput input:focus {
+    border-color: #0073e6;
+}
+
+
+/* =========================================
+   GUEST FILTERS
+   ========================================= */
+
+.guestFilters {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.guestItem {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 10px;
-    color: #555;
-    font-size: 12px;
+    align-items: center;
 }
-.lsOptionInput{
-    width: 50px;
+
+.guestItem div {
+    display: flex;
+    flex-direction: column;
 }
-.lsOptions{
-    padding: 10px;
+
+.guestItem strong {
+    font-size: 13px;
+    color: #333;
 }
-.listSearch>button{
-    padding: 10px;
-    background-color: #bc8d0c;
-    color: white;
+
+.guestItem span {
+    font-size: 11px;
+    color: #888;
+    margin-top: 2px;
+}
+
+.guestItem input {
+    width: 55px;
+    height: 34px;
+    border: 1px solid #d8dde5;
+    border-radius: 6px;
+    text-align: center;
+    outline: none;
+}
+
+.guestItem input:focus {
+    border-color: #0073e6;
+}
+
+
+/* =========================================
+   SEARCH BUTTON
+   ========================================= */
+
+.filterSearchButton {
+    width: calc(100% - 40px);
+    margin: 0 20px 20px;
+
+    height: 45px;
+
     border: none;
-    width: 100%;
-    
-}
-.justsearch {
-    background-color: #bc8d0c;
-    margin-top: 0; 
-    max-width: 120px;
-    max-height: 50px;
-    border-radius: 8px;
+    border-radius: 7px;
+
+    background-color: #0073e6;
     color: white;
-    font-weight: 100;
-    box-shadow: 9px 9px 10px rgba(0, 0, 0, 0.4);
+
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.filterSearchButton:hover {
+    background-color: #005bb5;
+}
+
+.filterSearchButton:active {
+    transform: scale(0.98);
+}
+
+
+/* =========================================
+   RESULTS
+   ========================================= */
+
+.listResult {
+    min-width: 0;
+}
+
+.resultsHeader {
+    background-color: white;
+    border: 1px solid #e3e7ed;
+    border-radius: 12px;
+    padding: 18px 22px;
+    margin-bottom: 18px;
+}
+
+.resultsHeader h1 {
+    margin: 0;
+    font-size: 22px;
+    color: #222;
+    font-weight: 600;
+}
+
+.resultsHeader p {
+    margin: 5px 0 0;
+    color: #777;
+    font-size: 13px;
+}
+
+
+/* =========================================
+   HOTEL RESULTS
+   ========================================= */
+
+.hotelResults {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+
+/* =========================================
+   LOADING / ERROR
+   ========================================= */
+
+.resultMessage {
+    background: white;
+    border: 1px solid #e3e7ed;
+    border-radius: 12px;
+    padding: 50px 20px;
+    text-align: center;
+    color: #666;
+}
+
+.resultMessage h3 {
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.resultMessage p {
+    margin: 0;
+    font-size: 14px;
+}
+
+.loader {
+    width: 32px;
+    height: 32px;
+    border: 3px solid #e5e5e5;
+    border-top-color: #0073e6;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin: 0 auto 15px;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+/* =========================================
+   TABLET
+   ========================================= */
+
+@media (max-width: 900px) {
+
+    .listContainer {
+        padding: 25px 15px 50px;
+    }
+
+    .listWrapper {
+        grid-template-columns: 250px minmax(0, 1fr);
+        gap: 18px;
+    }
+
+    .filterSection {
+        padding: 15px;
+    }
+
+    .filterSearchButton {
+        width: calc(100% - 30px);
+        margin-left: 15px;
+        margin-right: 15px;
+    }
+
+    .resultsHeader h1 {
+        font-size: 20px;
+    }
+}
+
+
+/* =========================================
+   MOBILE
+   ========================================= */
+
+@media (max-width: 700px) {
+
+    .listContainer {
+        padding: 20px 12px 40px;
+    }
+
+    .listWrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .listSearch {
+        width: 100%;
+        position: relative;
+        top: auto;
+        box-sizing: border-box;
+    }
+
+    .searchHeader {
+        padding: 16px;
+    }
+
+    .searchHeader h2 {
+        font-size: 18px;
+    }
+
+    .filterSection {
+        padding: 16px;
+    }
+
+    .filterItem {
+        margin-bottom: 16px;
+    }
+
+    .filterSearchButton {
+        width: calc(100% - 32px);
+        margin: 0 16px 16px;
+    }
+
+    .resultsHeader {
+        padding: 16px;
+        margin-bottom: 14px;
+    }
+
+    .resultsHeader h1 {
+        font-size: 18px;
+    }
+
+    .hotelResults {
+        gap: 14px;
+    }
+}
+
+
+/* =========================================
+   SMALL MOBILE
+   ========================================= */
+
+@media (max-width: 400px) {
+
+    .listContainer {
+        padding: 15px 8px 30px;
+    }
+
+    .priceInputs {
+        gap: 7px;
+    }
+
+    .resultsHeader h1 {
+        font-size: 17px;
+    }
+
+    .resultsHeader p {
+        font-size: 12px;
+    }
 }

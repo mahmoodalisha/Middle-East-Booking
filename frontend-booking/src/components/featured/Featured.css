@@ -1,27 +1,150 @@
-.featured{
+.featured {
     width: 100%;
     max-width: 1024px;
+
     display: flex;
     justify-content: space-between;
+
     gap: 20px;
+
     z-index: 1;
+
     margin-left: auto;
     margin-right: auto;
+
+    box-sizing: border-box;
+    padding: 0 10px;
 }
-.featuredItem{
+
+.featuredItem {
     position: relative;
+
     color: white;
+
     border-radius: 10px;
+
     overflow: hidden;
+
     height: 380px;
+
+    flex: 1;
+    min-width: 0;
+
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
-.featuredImg{
-    object-fit: fill;
-    height: 500px;
-    width: 500px;
+
+.featuredImg {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+
+    transition: transform 0.3s ease;
 }
-.featuredTitles{
+
+.featuredItem:hover .featuredImg {
+    transform: scale(1.05);
+}
+
+.featuredTitles {
     position: absolute;
+
     bottom: 20px;
     left: 20px;
+
+    z-index: 2;
+
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.6);
+}
+
+.featuredTitles h1 {
+    margin: 0;
+
+    font-size: 28px;
+}
+
+
+/* =========================================
+   TABLET
+   ========================================= */
+
+@media (max-width: 768px) {
+
+    .featured {
+        gap: 15px;
+        padding: 0 15px;
+    }
+
+    .featuredItem {
+        height: 300px;
+    }
+
+    .featuredTitles {
+        bottom: 15px;
+        left: 15px;
+    }
+
+    .featuredTitles h1 {
+        font-size: 23px;
+    }
+}
+
+
+/* =========================================
+   MOBILE
+   ========================================= */
+
+@media (max-width: 600px) {
+
+    .featured {
+        flex-direction: column;
+
+        gap: 15px;
+
+        padding: 0 15px;
+    }
+
+    .featuredItem {
+        width: 100%;
+        height: 220px;
+
+        flex: none;
+    }
+
+    .featuredTitles {
+        bottom: 15px;
+        left: 15px;
+    }
+
+    .featuredTitles h1 {
+        font-size: 22px;
+    }
+}
+
+
+/* =========================================
+   SMALL MOBILE
+   ========================================= */
+
+@media (max-width: 400px) {
+
+    .featured {
+        padding: 0 10px;
+        gap: 12px;
+    }
+
+    .featuredItem {
+        height: 190px;
+    }
+
+    .featuredTitles {
+        bottom: 12px;
+        left: 12px;
+    }
+
+    .featuredTitles h1 {
+        font-size: 20px;
+    }
 }

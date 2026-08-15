@@ -1,37 +1,258 @@
-.fp{
+/* =========================================
+   FEATURED PROPERTIES - DESKTOP
+   ========================================= */
+
+.fp {
     width: 100%;
     max-width: 1024px;
+
     display: flex;
+
     justify-content: space-between;
+
     gap: 20px;
+
+    margin: 0 auto;
+
+    padding: 0 10px;
+
+    box-sizing: border-box;
 }
-.fpItem{
+
+
+/* =========================================
+   PROPERTY CARD
+   ========================================= */
+
+.fpItem {
     flex: 1;
-    gap: 10px;
+
+    min-width: 0;
+
+    gap: 8px;
+
     display: flex;
+
     flex-direction: column;
-    width: 230px;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
 }
-.fpImg{
+
+.fpItem:hover {
+    transform: translateY(-3px);
+}
+
+
+/* =========================================
+   IMAGE
+   ========================================= */
+
+.fpImg,
+.fpItem img {
     width: 100%;
+
+    height: 200px;
+
+    object-fit: cover;
+
+    border-radius: 8px;
+
+    display: block;
+
+    transition: transform 0.3s ease;
 }
-.fpName{
+
+.fpItem:hover img {
+    transform: scale(1.02);
+}
+
+
+/* =========================================
+   TEXT
+   ========================================= */
+
+.fpName {
     font-weight: bold;
+
+    font-size: 16px;
+
+    color: #222;
+
+    line-height: 1.3;
 }
-.fpCity{
+
+.fpCity {
     font-weight: 500;
-}
-.fpPrice{
-    font-weight: 500;
-}
-.fpRating button{
-    background-color: #003580;
-    color: white;
-    border: none;
-    padding: 3px;
-    margin-right: 10px;
-    font-weight: bold;
-}
-.fpRating span{
+
     font-size: 14px;
+
+    color: #666;
+}
+
+.fpPrice {
+    font-weight: 500;
+
+    font-size: 14px;
+
+    color: #333;
+}
+
+
+/* =========================================
+   RATING
+   ========================================= */
+
+.fpRating {
+    display: flex;
+
+    align-items: center;
+
+    gap: 5px;
+
+    margin-top: 2px;
+}
+
+.fpRating button {
+    background-color: #003580;
+
+    color: white;
+
+    border: none;
+
+    padding: 4px 6px;
+
+    border-radius: 3px;
+
+    font-weight: bold;
+
+    font-size: 12px;
+
+    margin-right: 3px;
+}
+
+.fpRating span {
+    font-size: 13px;
+
+    color: #555;
+
+    font-weight: 500;
+}
+
+
+/* =========================================
+   TABLET
+   ========================================= */
+
+@media (max-width: 768px) {
+
+    .fp {
+        gap: 15px;
+
+        padding: 0 15px;
+    }
+
+    .fpItem {
+        gap: 7px;
+    }
+
+    .fpItem img {
+        height: 170px;
+    }
+
+    .fpName {
+        font-size: 15px;
+    }
+
+    .fpCity,
+    .fpPrice {
+        font-size: 13px;
+    }
+
+    .fpRating span {
+        font-size: 12px;
+    }
+}
+
+
+/* =========================================
+   MOBILE
+   ========================================= */
+
+@media (max-width: 600px) {
+
+    .fp {
+        display: grid;
+
+        grid-template-columns: repeat(2, 1fr);
+
+        gap: 25px 12px;
+
+        padding: 0 15px;
+    }
+
+    .fpItem {
+        width: 100%;
+    }
+
+    .fpItem img {
+        height: 150px;
+
+        border-radius: 7px;
+    }
+
+    .fpName {
+        font-size: 14px;
+
+        line-height: 1.3;
+    }
+
+    .fpCity,
+    .fpPrice {
+        font-size: 12px;
+    }
+
+    .fpRating button {
+        font-size: 11px;
+
+        padding: 3px 5px;
+    }
+
+    .fpRating span {
+        font-size: 11px;
+    }
+}
+
+
+/* =========================================
+   SMALL MOBILE
+   ========================================= */
+
+@media (max-width: 400px) {
+
+    .fp {
+        gap: 20px 10px;
+
+        padding: 0 10px;
+    }
+
+    .fpItem img {
+        height: 125px;
+    }
+
+    .fpName {
+        font-size: 13px;
+    }
+
+    .fpCity,
+    .fpPrice {
+        font-size: 11px;
+    }
+
+    .fpRating span {
+        font-size: 10px;
+    }
 }

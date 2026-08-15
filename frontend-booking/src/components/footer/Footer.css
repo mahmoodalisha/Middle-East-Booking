@@ -1,20 +1,184 @@
-.footer{
+/* =========================================
+   FOOTER
+   ========================================= */
+
+.footer {
     width: 100%;
-    width: 1024px;
-    font-size: 12px;
+    max-width: 1024px;
+
+    margin: 50px auto 0;
+
+    padding: 45px 30px 25px;
+
+    box-sizing: border-box;
+
+    font-size: 13px;
+
+    color: #d5dbe3;
 }
-.fLists{
+
+
+/* =========================================
+   FOOTER LISTS
+   ========================================= */
+
+.fLists {
     width: 100%;
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 50px;
+
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 30px;
+
+    margin-bottom: 35px;
+
+    padding-bottom: 30px;
+
+    border-bottom: 1px solid #e5e7eb;
 }
-.fList{
+
+
+/* =========================================
+   LIST
+   ========================================= */
+
+.fList {
     list-style: none;
+
     padding: 0;
+
+    margin: 0;
 }
-.fListItem{
-    margin-bottom: 10px;
+
+
+/* =========================================
+   LIST ITEMS
+   ========================================= */
+
+.fListItem {
+    margin-bottom: 12px;
+
     color: #003580;
+
     cursor: pointer;
+
+    font-size: 13px;
+
+    transition:
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.fListItem:hover {
+    color: #0073e6;
+
+    transform: translateX(2px);
+}
+
+
+/* =========================================
+   COPYRIGHT
+   ========================================= */
+
+.fText {
+    text-align: center;
+
+    color: #777;
+
+    font-size: 12px;
+
+    padding-top: 5px;
+}
+
+
+/* =========================================
+   TABLET
+   ========================================= */
+
+@media (max-width: 768px) {
+
+    .footer {
+        width: 100%;
+
+        padding: 40px 25px 22px;
+
+        margin-top: 40px;
+    }
+
+    .fLists {
+        grid-template-columns: repeat(2, 1fr);
+
+        gap: 25px 40px;
+
+        margin-bottom: 30px;
+
+        padding-bottom: 25px;
+    }
+
+    .fListItem {
+        font-size: 13px;
+
+        margin-bottom: 10px;
+    }
+}
+
+
+/* =========================================
+   MOBILE
+   ========================================= */
+
+@media (max-width: 600px) {
+
+    .footer {
+        padding: 30px 20px 20px;
+
+        margin-top: 30px;
+    }
+
+    .fLists {
+        grid-template-columns: repeat(2, 1fr);
+
+        gap: 25px 20px;
+
+        margin-bottom: 25px;
+
+        padding-bottom: 22px;
+    }
+
+    .fListItem {
+        font-size: 12px;
+
+        margin-bottom: 9px;
+    }
+
+    .fText {
+        font-size: 11px;
+    }
+}
+
+
+/* =========================================
+   SMALL MOBILE
+   ========================================= */
+
+@media (max-width: 400px) {
+
+    .footer {
+        padding: 25px 15px 18px;
+    }
+
+    .fLists {
+        gap: 20px 15px;
+    }
+
+    .fListItem {
+        font-size: 11px;
+
+        margin-bottom: 8px;
+    }
+
+    .fText {
+        font-size: 10px;
+    }
 }

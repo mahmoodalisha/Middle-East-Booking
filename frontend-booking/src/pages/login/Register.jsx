@@ -16,7 +16,7 @@ const Register = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="register-container">
+    <div className="auth-container">
       <h2>Register</h2>
       <Formik
         initialValues={{ username: "", email: "", password: "" }}

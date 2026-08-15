@@ -41,7 +41,7 @@ const Footer = () => {
             </ul>
         </div>
       
-      <div className="fText">Copyright @ 2024</div>
+      <div className="fText">Copyright @2026</div>
     </div>
   )
 }

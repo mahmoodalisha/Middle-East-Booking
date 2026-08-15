@@ -39,7 +39,7 @@ const HotelSchema = new mongoose.Schema({
         max:10,
     },
     rooms:{
-        type: [String], //reference to Room document
+        type: [String], // Array of Room document IDs
     },
     cheapestPrice:{
         type: Number,

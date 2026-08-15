@@ -19,7 +19,7 @@ const Login = () => {
   const [errorMessage, setErrorMessage] = useState("");
 
   return (
-    <div className="register-container">
+    <div className="auth-container">
       <h2>Login</h2>
 
       <Formik

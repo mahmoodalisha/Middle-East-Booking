@@ -1,99 +1,335 @@
-.register-container{
-  margin-left: 500px;
-  margin-top: 100px;
-}
-.login-container {
+/* =========================================
+   AUTH PAGE
+   ========================================= */
+
+.auth-container {
+  min-height: 100vh;
+  width: 100%;
+  box-sizing: border-box;
+
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 100vh; 
-  background-color: #f4f7fc;
-  padding: 20px;
+
+  padding: 40px 20px;
+
+  background:
+    radial-gradient(circle at top left, rgba(22, 144, 231, 0.12), transparent 35%),
+    radial-gradient(circle at bottom right, rgba(0, 91, 181, 0.10), transparent 35%),
+    #f5f8fc;
 }
 
-.login-container h2 {
-  font-size: 2rem;
-  color: #333;
-  margin-bottom: 20px;
+
+/* =========================================
+   HEADING
+   ========================================= */
+
+.auth-container > h2 {
+  margin: 0 0 22px;
+
+  font-size: 32px;
+  font-weight: 700;
+  color: #172b4d;
+
+  letter-spacing: -0.5px;
 }
 
-form {
+
+/* =========================================
+   FORM CARD
+   ========================================= */
+
+.auth-container form {
+  width: 100%;
+  max-width: 420px;
+
+  box-sizing: border-box;
+
   display: flex;
   flex-direction: column;
-  width: 100%;
-  max-width: 400px; 
-  background-color: #fff;
-  padding: 30px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  margin-top: 20px;
-  border: 1px solid #ddd; 
+
+  padding: 34px;
+
+  background: #ffffff;
+
+  border: 1px solid #e6ebf2;
+  border-radius: 16px;
+
+  box-shadow:
+    0 12px 35px rgba(15, 40, 75, 0.08);
+
+  margin: 0;
 }
 
-form label {
-  font-size: 1rem;
-  color: #333;
+
+/* =========================================
+   FORM GROUP
+   ========================================= */
+
+.auth-container form > div {
+  margin-bottom: 18px;
+}
+
+
+/* =========================================
+   LABEL
+   ========================================= */
+
+.auth-container form label {
+  display: block;
+
   margin-bottom: 8px;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  color: #344054;
 }
 
-form input {
-  padding: 12px;
-  margin-bottom: 15px;
-  font-size: 1rem;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+
+/* =========================================
+   INPUT
+   ========================================= */
+
+.auth-container form input {
+  width: 100%;
+  height: 48px;
+
+  box-sizing: border-box;
+
+  padding: 0 14px;
+
+  margin: 0;
+
+  border: 1px solid #d8dee8;
+  border-radius: 9px;
+
+  background: #fafbfc;
+
+  color: #172b4d;
+  font-size: 15px;
+
   outline: none;
-  transition: border 0.3s ease;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
 }
 
-form input:focus {
-  border: 1px solid #4CAF50;
+
+.auth-container form input::placeholder {
+  color: #98a2b3;
 }
 
-form div {
-  margin-bottom: 15px;
+
+.auth-container form input:hover {
+  border-color: #b8c2d0;
 }
 
-form div div {
-  color: red;
-  font-size: 0.9rem;
+
+.auth-container form input:focus {
+  background: #ffffff;
+
+  border-color: #0071c2;
+
+  box-shadow: 0 0 0 3px rgba(0, 113, 194, 0.10);
 }
 
-form button {
-  padding: 12px;
-  background-color: #4CAF50;
-  color: #fff;
-  font-size: 1rem;
+
+/* =========================================
+   VALIDATION ERRORS
+   ========================================= */
+
+.auth-container form div div {
+  margin-top: 6px;
+
+  color: #d92d20;
+
+  font-size: 12px;
+  font-weight: 500;
+}
+
+
+/* =========================================
+   SERVER ERROR
+   ========================================= */
+
+.error-message {
+  margin: 4px 0 16px;
+
+  color: #d92d20;
+
+  font-size: 13px;
+  font-weight: 500;
+
+  text-align: center;
+}
+
+
+/* =========================================
+   BUTTON
+   ========================================= */
+
+.auth-container form button {
+  width: 100%;
+  height: 48px;
+
+  margin-top: 4px;
+
   border: none;
-  border-radius: 4px;
+  border-radius: 9px;
+
+  background: linear-gradient(
+    135deg,
+    #0071c2,
+    #005b9f
+  );
+
+  color: white;
+
+  font-size: 15px;
+  font-weight: 600;
+
   cursor: pointer;
-  transition: background-color 0.3s ease;
+
+  box-shadow: 0 6px 16px rgba(0, 113, 194, 0.20);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
 }
 
-form button:hover {
-  background-color: #45a049;
+
+.auth-container form button:hover {
+  background: linear-gradient(
+    135deg,
+    #0065ad,
+    #004f8c
+  );
+
+  transform: translateY(-1px);
+
+  box-shadow: 0 8px 20px rgba(0, 113, 194, 0.25);
 }
 
-.login-container p {
-  font-size: 1rem;
-  color: #555;
+
+.auth-container form button:active {
+  transform: translateY(0);
+}
+
+
+/* =========================================
+   BOTTOM LINKS
+   ========================================= */
+
+.auth-container > p {
+  margin: 14px 0 0;
+
+  color: #667085;
+
+  font-size: 14px;
+
+  text-align: center;
+}
+
+
+.auth-container > p:first-of-type {
   margin-top: 20px;
 }
 
-.login-container a {
-  color: #4CAF50;
+
+.auth-container a {
+  color: #0071c2;
+
+  font-weight: 600;
+
   text-decoration: none;
+
+  transition: color 0.2s ease;
 }
 
-.login-container a:hover {
+
+.auth-container a:hover {
+  color: #005b9f;
   text-decoration: underline;
 }
 
-.error-message {
-  color: red;
-  font-size: 1rem;
-  margin-top: 10px;
-  text-align: center;
-  font-weight: bold;
+
+/* =========================================
+   TABLET
+   ========================================= */
+
+@media (max-width: 768px) {
+
+  .auth-container {
+    padding: 30px 20px;
+  }
+
+  .auth-container > h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+  }
+
+  .auth-container form {
+    max-width: 420px;
+    padding: 30px;
+  }
+}
+
+
+/* =========================================
+   MOBILE
+   ========================================= */
+
+@media (max-width: 480px) {
+
+  .auth-container {
+    padding: 25px 16px;
+  }
+
+  .auth-container > h2 {
+    font-size: 26px;
+    margin-bottom: 18px;
+  }
+
+  .auth-container form {
+    padding: 24px 20px;
+
+    border-radius: 13px;
+  }
+
+  .auth-container form input {
+    height: 46px;
+  }
+
+  .auth-container form button {
+    height: 46px;
+  }
+
+  .auth-container > p {
+    font-size: 13px;
+  }
+}
+
+
+/* =========================================
+   SMALL MOBILE
+   ========================================= */
+
+@media (max-width: 360px) {
+
+  .auth-container {
+    padding: 20px 12px;
+  }
+
+  .auth-container > h2 {
+    font-size: 24px;
+  }
+
+  .auth-container form {
+    padding: 22px 17px;
+  }
 }

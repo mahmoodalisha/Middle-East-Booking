@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHotel, faUser, faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import "./Navbar.css";
 
 const Navbar = () => {
@@ -13,52 +15,61 @@ const Navbar = () => {
   };
 
   return (
-    <div className="navbar">
+    <nav className="navbar">
       <div className="navContainer">
-        <Link to="/" style={{ color: "inherit", textDecoration: "none" }}>
-          <span className="logo">Urban Lodgings</span>
+
+        {/* Logo */}
+        <Link to="/" className="navLogo">
+          <div className="logoIcon">
+            <FontAwesomeIcon icon={faHotel} />
+          </div>
+
+          <div className="logoText">
+            <span className="logoMain">Urban</span>
+            <span className="logoSub">LODGINGS</span>
+          </div>
         </Link>
 
-        {user ? (
-          <div className="navItems">
-            <span
-      className="welcomeMessage"
-      style={{
-        fontWeight: "bold",
-        color: "#fff",
-        marginLeft: "30px",
-        fontSize: "19px",
-      }}
-    >
-      Welcome!{" "}
-    </span>
-    <span
-      className="username"
-      style={{
-        fontWeight: "bold",
-        color: "#fff",
-        marginLeft: "3px",
-        fontSize: "19px"
-      }}
-    >
-      {user.username}
-    </span>
-            <button className="navButton" onClick={handleLogout}>
-              Logout
-            </button>
-          </div>
-        ) : (
-          <div className="navItems">
-            <Link to="/register">
-              <button className="navButton">Register</button>
-            </Link>
-            <Link to="/login">
-              <button className="navButton">Login</button>
-            </Link>
-          </div>
-        )}
+        {/* Right side */}
+        <div className="navItems">
+
+          {user ? (
+            <>
+              <div className="userProfile">
+                <div className="userIcon">
+                  <FontAwesomeIcon icon={faUser} />
+                </div>
+
+                <div className="userInfo">
+                  <span className="welcomeText">Welcome back</span>
+                  <span className="username">{user.username}</span>
+                </div>
+              </div>
+
+              <button
+                className="navButton logoutButton"
+                onClick={handleLogout}
+              >
+                <FontAwesomeIcon icon={faArrowRightFromBracket} />
+                <span>Logout</span>
+              </button>
+            </>
+          ) : (
+            <>
+              <Link to="/register" className="navLink">
+                Register
+              </Link>
+
+              <Link to="/login" className="loginButton">
+                Login
+              </Link>
+            </>
+          )}
+
+        </div>
+
       </div>
-    </div>
+    </nav>
   );
 };
 
