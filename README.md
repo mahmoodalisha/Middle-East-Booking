@@ -118,3 +118,9 @@ Hotel
 
 
 ![Screenshot 2024-08-18 195006](https://github.com/user-attachments/assets/46b3f9dc-9fdd-4910-9c7a-b392362981e2)
+
+<img width="1918" height="967" alt="Screenshot 2026-07-19 223344" src="https://github.com/user-attachments/assets/a122d7be-d50a-4ae4-babf-ea11515ecf1d" />
+
+<img width="1918" height="958" alt="Screenshot 2026-07-19 223437" src="https://github.com/user-attachments/assets/d780754b-0c71-4629-98de-6e79351e6931" />
+
+<img width="1920" height="964" alt="Screenshot 2026-07-19 223455" src="https://github.com/user-attachments/assets/3c3636e9-8374-4394-af79-cd92e6c7b1f0" />
