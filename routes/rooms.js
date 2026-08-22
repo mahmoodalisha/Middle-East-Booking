@@ -4,14 +4,13 @@ const { createRoom, updateRoom, deleteRoom, getRoom, getRooms } = require('../co
 const { verifyAdmin } = require('../utils/verifyToken');
 
 // CREATE
-router.post("/:hotelid", createRoom);
+router.post("/:hotelid",verifyAdmin, createRoom);
 
 // UPDATE
-router.put("/:id", updateRoom);
-
+router.put("/:id",verifyAdmin, updateRoom);
 
 // DELETE
-router.delete("/:id", deleteRoom);
+router.delete("/:id/:hotelid", verifyAdmin, deleteRoom);
 
 // GET
 router.get("/:id", getRoom);
