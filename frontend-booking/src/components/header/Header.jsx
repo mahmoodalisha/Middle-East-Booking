@@ -4,13 +4,11 @@ import {
   faCheckCircle,
   faLocationDot,
 } from "@fortawesome/free-solid-svg-icons";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./Header.css";
 
 import { DateRange } from "react-date-range";
-import { useContext, useState } from "react";
-
+import { useContext, useState, useEffect, useRef } from "react";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 
@@ -22,11 +20,8 @@ import { AuthContext } from "../../context/AuthContext";
 
 
 const Header = ({ type }) => {
-
   const [destination, setDestination] = useState("");
-
   const [openDate, setOpenDate] = useState(false);
-
   const [dates, setDates] = useState([
     {
       startDate: new Date(),
@@ -49,6 +44,25 @@ const Header = ({ type }) => {
   const { user } = useContext(AuthContext);
 
   const { dispatch } = useContext(SearchContext);
+  const searchRef = useRef();
+  
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      // If the click is outside the search bar, close both popovers
+      if (searchRef.current && !searchRef.current.contains(event.target)) {
+        setOpenDate(false);
+        setOpenOptions(false);
+      }
+    };
+
+    // Listen for mouse clicks on the entire page
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      // Clean up the listener when the component unmounts
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
 
   const handleOption = (name, operation) => {
@@ -134,21 +148,16 @@ const Header = ({ type }) => {
                   <FontAwesomeIcon icon={faCheckCircle} />
                   Free cancellation
                 </span>
-
                 <span>
                   <FontAwesomeIcon icon={faCheckCircle} />
                   Secure booking
-                </span>
-
+               </span>
               </div>
-
             </div>
 
 
             {/* SEARCH CARD */}
-
-            <div className="headerSearch">
-
+            <div className="headerSearch" ref={searchRef}>
 
               {/* DESTINATION */}
 
@@ -160,9 +169,7 @@ const Header = ({ type }) => {
                 />
 
                 <div className="searchField">
-
                   <label>Destination</label>
-
                   <input
                     type="text"
                     placeholder="Where are you going?"
@@ -174,7 +181,6 @@ const Header = ({ type }) => {
                   />
 
                 </div>
-
               </div>
 
 
@@ -230,14 +236,11 @@ const Header = ({ type }) => {
                     />
 
                   </div>
-
                 )}
-
               </div>
 
 
               {/* GUESTS */}
-
               <div
                 className="headerSearchItem clickable"
                 onClick={() => {
@@ -252,9 +255,7 @@ const Header = ({ type }) => {
                 />
 
                 <div className="searchField">
-
                   <label>Guests & Rooms</label>
-
                   <span className="headerSearchText">
 
                     {options.adult} adult
@@ -270,7 +271,6 @@ const Header = ({ type }) => {
                     {options.room !== 1 ? "s" : ""}
 
                   </span>
-
                 </div>
 
 
@@ -284,7 +284,6 @@ const Header = ({ type }) => {
                     {/* ADULT */}
 
                     <div className="optionItem">
-
                       <div>
                         <span className="optionText">
                           Adults
@@ -296,7 +295,6 @@ const Header = ({ type }) => {
                       </div>
 
                       <div className="optionCounter">
-
                         <button
                           disabled={options.adult <= 1}
                           className="optionCounterButton"
@@ -326,9 +324,7 @@ const Header = ({ type }) => {
 
 
                     {/* CHILDREN */}
-
                     <div className="optionItem">
-
                       <div>
                         <span className="optionText">
                           Children
@@ -363,28 +359,21 @@ const Header = ({ type }) => {
                         >
                           +
                         </button>
-
                       </div>
-
                     </div>
 
 
                     {/* ROOMS */}
-
                     <div className="optionItem">
-
                       <div>
                         <span className="optionText">
                           Rooms
                         </span>
-
                         <small>
                           Number of rooms
                         </small>
                       </div>
-
                       <div className="optionCounter">
-
                         <button
                           disabled={options.room <= 1}
                           className="optionCounterButton"
@@ -394,11 +383,9 @@ const Header = ({ type }) => {
                         >
                           −
                         </button>
-
                         <span>
                           {options.room}
                         </span>
-
                         <button
                           className="optionCounterButton"
                           onClick={() =>
@@ -407,47 +394,34 @@ const Header = ({ type }) => {
                         >
                           +
                         </button>
-
                       </div>
-
                     </div>
-
                   </div>
-
                 )}
-
               </div>
 
 
               {/* SEARCH BUTTON */}
-
               <button
                 className="searchButton"
                 onClick={handleSearch}
               >
                 Search
               </button>
-
             </div>
 
 
             {!user && (
-
               <button
                 className="heroSignIn"
                 onClick={() => navigate("/login")}
               >
                 Sign in / Register
               </button>
-
             )}
-
           </>
-
         )}
-
       </div>
-
     </header>
 
   );
