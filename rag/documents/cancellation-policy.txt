@@ -1,0 +1,10 @@
+Middle East Booking - Cancellation Information
+
+Does Middle East Booking currently provide a cancellation policy?
+The current booking implementation does not define a cancellation or refund policy.
+
+Can users cancel a booking?
+The available booking controller currently provides functionality for creating bookings. A cancellation operation is not defined in the provided booking controller.
+
+Are refunds supported?
+A refund policy is not defined in the current booking implementation. If a user asks about cancellation or refunds, the assistant should not invent a cancellation or refund policy. It should explain that cancellation and refund rules are not currently defined in the available application information.

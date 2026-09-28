@@ -1,0 +1,28 @@
+Middle East Booking - Booking Information
+
+How can I book a room?
+Users can select a hotel, choose available rooms, select their booking dates, and create a booking.
+
+What information is associated with a booking?
+A booking contains the user, hotel, selected rooms, room numbers, start date, end date, total amount, and payment status.
+
+Can I book multiple rooms?
+Yes. The booking system accepts multiple room IDs and room numbers for a booking.
+
+Can I book a room that is already booked?
+No. Before creating a booking, the system checks whether the selected physical room is unavailable on any of the requested dates.
+
+What happens if the room is already booked?
+The booking is rejected and the API returns a 409 conflict response with the message "Room already booked for selected dates".
+
+How does the system prevent conflicting bookings?
+The system checks the unavailable dates of each selected physical room before creating the booking. The room availability updates and booking creation are performed inside a MongoDB transaction.
+
+What happens if booking creation fails?
+The MongoDB transaction is aborted, so the reservation changes made during that transaction are not committed.
+
+Is a booking automatically marked as paid?
+No. New bookings are created with isPaid set to false.
+
+How is the total booking amount stored?
+The total amount is stored with the booking in the totalAmount field.

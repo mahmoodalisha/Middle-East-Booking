@@ -10,6 +10,7 @@ const usersRoute = require("./routes/users");
 const hotelsRoute = require("./routes/hotels");
 const roomsRoute = require("./routes/rooms");
 const bookingsRoute = require("./routes/bookings");
+const chatRoute = require("./routes/chat");
 
 const app = express();
 
@@ -35,6 +36,7 @@ app.use("/api/users", usersRoute);
 app.use("/api/hotels", hotelsRoute);
 app.use("/api/rooms", roomsRoute);
 app.use("/api/bookings", bookingsRoute);
+app.use("/api/chat", chatRoute);
 
 app.use((err, req, res, next) => {
   const errorStatus = err.status || 500;

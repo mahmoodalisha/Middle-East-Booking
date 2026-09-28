@@ -1,0 +1,16 @@
+Middle East Booking - Check-in Information
+
+What check-in time does Middle East Booking use?
+A specific check-in time is not defined in the current application information.
+
+What check-out time does Middle East Booking use?
+A specific check-out time is not defined in the current application information.
+
+Does the application support early check-in?
+This is not defined in the current application information.
+
+Does the application support late checkout?
+This is not defined in the current application information.
+
+What documents are required during check-in?
+The current application information does not define any check-in document requirements. The assistant should not invent check-in or check-out policies that are not defined in the application's knowledge base.
