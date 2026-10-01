@@ -38,3 +38,8 @@ Request body
   "endDate": "2025-06-14",
   "totalAmount": 5000
 }
+
+POST http://localhost:8000/api/chat
+Request body {
+  "question": "Can I book multiple rooms?"
+}
