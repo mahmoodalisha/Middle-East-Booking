@@ -1,16 +1,16 @@
 Middle East Booking - Check-in Information
 
-What check-in time does Middle East Booking use?
-A specific check-in time is not defined in the current application information.
+What check-in time does the application use?
+The application uses UTC (Coordinated Universal Time).
 
-What check-out time does Middle East Booking use?
-A specific check-out time is not defined in the current application information.
+What check-out time does the application use?
+The application uses UTC (Coordinated Universal Time).
 
 Does the application support early check-in?
-This is not defined in the current application information.
+That depends on the specific hotel policy if the hotels can allow early check-ins.
 
 Does the application support late checkout?
-This is not defined in the current application information.
+That depends on the specific hotel policy if the hotels can allow late check-outs.
 
 What documents are required during check-in?
-The current application information does not define any check-in document requirements. The assistant should not invent check-in or check-out policies that are not defined in the application's knowledge base.
+The documents that are required during check-in are your passport and your government national Id card.

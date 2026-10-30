@@ -13,16 +13,22 @@ Can I book a room that is already booked?
 No. Before creating a booking, the system checks whether the selected physical room is unavailable on any of the requested dates.
 
 What happens if the room is already booked?
-The booking is rejected and the API returns a 409 conflict response with the message "Room already booked for selected dates".
+The booking is rejected and the system returns with a response message "Room already booked for selected dates".
 
 How does the system prevent conflicting bookings?
-The system checks the unavailable dates of each selected physical room before creating the booking. The room availability updates and booking creation are performed inside a MongoDB transaction.
+The system checks the unavailable dates of each selected physical room before creating the booking.
 
 What happens if booking creation fails?
-The MongoDB transaction is aborted, so the reservation changes made during that transaction are not committed.
+The transaction is aborted, so the reservation changes made during that transaction are not committed.
 
 Is a booking automatically marked as paid?
-No. New bookings are created with isPaid set to false.
+No. Unless you make a payment and a payment confiramtion is made, a booking is not marked and paid.
 
-How is the total booking amount stored?
-The total amount is stored with the booking in the totalAmount field.
+Can I book rooms in multiple hotels in the same booking under the same name?
+Yes, you can make bookings in multiple hotels under one same booking.
+
+What specific room details are saved when a reservation is confirmed?
+Each booking saves the specific room IDs, the corresponding physical room numbers, the associated user profile, the hotel property, and the exact check-in and check-out dates.
+
+How is a booking linked to a specific customer?
+Every booking record contains a direct reference to the user ID of the account that placed the reservation.

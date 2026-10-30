@@ -22,7 +22,7 @@ Can I view the rooms available at a hotel?
 Yes. A hotel is associated with its rooms, and the application can retrieve the rooms belonging to a particular hotel.
 
 What information does a room have?
-A room has a title, price, maximum number of people, description, physical room numbers, and unavailable dates.
+A room has a price, maximum number of people, description, physical room numbers, and unavailable dates.
 
 What is a physical room number?
 A physical room number represents an actual room belonging to a particular room type. Each physical room maintains its own unavailable dates.
@@ -33,8 +33,8 @@ A physical room is unavailable when one or more dates for that room have already
 Can two users book the same room for the same date?
 The booking system checks the room's unavailable dates before creating a booking and rejects a booking when a date conflict is detected.
 
-Does the application use database transactions for bookings?
-Yes. Booking creation uses a MongoDB transaction to coordinate room availability updates and booking creation.
+Can a user accidentally book the exact same room twice for the same dates in one transaction?
+No. The system validates room availability beforehand and rejects conflicting overlapping dates with the message "Room already booked for selected dates".
 
-Can I see whether a booking is paid?
-A booking contains an isPaid field that indicates its payment status. New bookings are initially marked as unpaid.
+What time zone are booking start and end dates processed in?
+All booking timestamps, start dates, and end dates are processed and stored globally in UTC (Coordinated Universal Time).
