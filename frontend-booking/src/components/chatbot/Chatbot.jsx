@@ -9,6 +9,7 @@ const QUICK_SUGGESTIONS = [
 ]
 
 const Chatbot = () => {
+  const apiBase = process.env.REACT_APP_SERVER_URL;
   const [isOpen, setIsOpen] = useState(false)
   const [question, setQuestion] = useState("")
   const [messages, setMessages] = useState([
@@ -78,7 +79,7 @@ const Chatbot = () => {
     try {
       setLoading(true)
 
-      const response = await fetch("http://localhost:8000/api/chat", {
+      const response = await fetch(`${apiBase}/api/chat`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
