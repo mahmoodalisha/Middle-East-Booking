@@ -105,7 +105,6 @@ if (error) {
           roomNumber: selectedRooms.map((room) => room.number),
           startDate: dates[0].startDate,
           endDate: dates[0].endDate,
-          totalAmount,
         },
         {
         headers: {

@@ -10,27 +10,36 @@ const createBooking = async (req, res, next) => {
 
     const {
       hotelId,
-      roomId,
+      roomId, // Array of subdocument IDs (_id of each specific roomNumber)
       roomNumber,
       startDate,
       endDate,
-      totalAmount,
     } = req.body;
 
-    // Generate booking dates
-    const bookingDates = [];
-
-    let current = new Date(startDate);
+    // 1. Validate dates and calculate number of nights
+    const start = new Date(startDate);
     const last = new Date(endDate);
+
+    const numNights = Math.round((last - start) / (1000 * 60 * 60 * 24));
+
+    if (numNights <= 0) {
+      throw new Error("Invalid date range selected.");
+    }
+
+    // Generate booking dates array for availability checks
+    const bookingDates = [];
+    let current = new Date(start);
 
     while (current <= last) {
       bookingDates.push(new Date(current));
       current.setDate(current.getDate() + 1);
     }
 
-    // Check every selected room
-    for (const id of roomId) {
+    let calculatedTotalAmount = 0;
 
+    // 2. Iterate through each room ID selected by the user
+    for (const id of roomId) {
+      // Find the parent Room category that contains this specific roomNumber subdocument
       const room = await Room.findOne(
         {
           "roomNumbers._id": id,
@@ -49,11 +58,10 @@ const createBooking = async (req, res, next) => {
         throw new Error("Room not found");
       }
 
-      // Conflict check
+      // 3. Conflict check for double bookings
       const alreadyBooked = bookingDates.some((date) =>
         selectedRoom.unavailableDates.some(
-          (bookedDate) =>
-            bookedDate.getTime() === date.getTime()
+          (bookedDate) => bookedDate.getTime() === date.getTime()
         )
       );
 
@@ -61,13 +69,17 @@ const createBooking = async (req, res, next) => {
         throw new Error("Room already booked for selected dates");
       }
 
-      // Reserve dates
+      // 4. SECURE SERVER-SIDE PRICING CALCULATION
+      // room.price comes directly from the database schema, preventing tampering
+      calculatedTotalAmount += room.price * numNights;
+
+      // 5. Reserve dates in the subdocument
       selectedRoom.unavailableDates.push(...bookingDates);
 
       await room.save({ session });
     }
 
-    // Create booking
+    // 6. Create the booking entry with the secure price
     const booking = await Booking.create(
       [
         {
@@ -77,7 +89,7 @@ const createBooking = async (req, res, next) => {
           roomNumber,
           startDate,
           endDate,
-          totalAmount,
+          totalAmount: calculatedTotalAmount, // Securely calculated on the server
           isPaid: false,
         },
       ],
@@ -87,13 +99,12 @@ const createBooking = async (req, res, next) => {
     await session.commitTransaction();
 
     res.status(201).json(booking[0]);
-
   } catch (err) {
-
     await session.abortTransaction();
 
     if (
-      err.message === "Room already booked for selected dates"
+      err.message === "Room already booked for selected dates" ||
+      err.message === "Invalid date range selected."
     ) {
       return res.status(409).json({
         message: err.message,
@@ -101,11 +112,8 @@ const createBooking = async (req, res, next) => {
     }
 
     next(err);
-
   } finally {
-
     session.endSession();
-
   }
 };
 
